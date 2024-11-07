@@ -2,7 +2,7 @@ version: '3'
 
 services:
   planka:
-    image: ghcr.io/plankanban/planka:latest
+    build: .
     restart: on-failure
     volumes:
       - user-avatars:/app/public/user-avatars
@@ -11,11 +11,11 @@ services:
     ports:
       - 3000:1337
     environment:
-      - BASE_URL=http://localhost:3000
+      - BASE_URL=https://planka.eds.ancoder.net
       - DATABASE_URL=postgresql://postgres@postgres/planka
-      - SECRET_KEY=notsecretkey
+      - SECRET_KEY=66e7675383e71e5e236d8f79926ab98b44739438f4dbb41aa0c86456b722586c55cad16681536ce6e4ec9f0b089f8f3abbec866d79544069ec5c1e5022376fc3
 
-      # - TRUST_PROXY=0
+      - TRUST_PROXY=1
       # - TOKEN_EXPIRES_IN=365 # In days
 
       # related: https://github.com/knex/knex/issues/2354
@@ -26,18 +26,18 @@ services:
       # Configure knex to accept SSL certificates
       # - KNEX_REJECT_UNAUTHORIZED_SSL_CERTIFICATE=false
 
-      # - DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
-      # - DEFAULT_ADMIN_PASSWORD=demo
-      # - DEFAULT_ADMIN_NAME=Demo Demo
-      # - DEFAULT_ADMIN_USERNAME=demo
+      - DEFAULT_ADMIN_EMAIL=admin@ancoder.net # Do not remove if you want to prevent this user from being edited/deleted
+      - DEFAULT_ADMIN_PASSWORD=A!23qweasdLpla
+      - DEFAULT_ADMIN_NAME=Admin
+      - DEFAULT_ADMIN_USERNAME=Admin
 
       # - SHOW_DETAILED_AUTH_ERRORS=false # Set to true to show more detailed authentication error messages. It should not be enabled without a rate limiter for security reasons.
 
       # - ALLOW_ALL_TO_CREATE_PROJECTS=true
 
-      # - OIDC_ISSUER=
-      # - OIDC_CLIENT_ID=
-      # - OIDC_CLIENT_SECRET=
+      # - OIDC_ISSUER=discord
+      # - OIDC_CLIENT_ID=test
+      # - OIDC_CLIENT_SECRET=test
       # - OIDC_ID_TOKEN_SIGNED_RESPONSE_ALG=
       # - OIDC_USERINFO_SIGNED_RESPONSE_ALG=
       # - OIDC_SCOPES=openid email profile
